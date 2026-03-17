@@ -44,8 +44,6 @@ public class GameEvent {
     }
 
     //GETTERIT SETTERIT
-
-
     public User getOrganizer() {
         return organizer;
     }

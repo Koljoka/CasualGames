@@ -103,6 +103,7 @@ public class UserView extends VerticalLayout {
     private void editUser(User user) {
         selectedUser = user;
 
+        usernameField.setValue(user.getUsername() != null ? user.getUsername() : "");
         nameField.setValue(user.getName() != null ? user.getName() : "");
         emailField.setValue(user.getEmail() != null ? user.getEmail() : "");
         cityField.setValue(user.getCity() != null ? user.getCity() : "");
@@ -144,12 +145,11 @@ public class UserView extends VerticalLayout {
 
     //Tyhjennetään lomakekentät
     private void clearForm() {
+        usernameField.clear();
         nameField.clear();
         emailField.clear();
         cityField.clear();
         skillLevelField.clear();
-
-        //Nollataan valittu käyttäjä
         selectedUser = null;
     }
 }
