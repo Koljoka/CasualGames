@@ -1,0 +1,207 @@
+CREATE DATABASE  IF NOT EXISTS `casualgames_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `casualgames_db`;
+-- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: casualgames_db
+-- ------------------------------------------------------
+-- Server version	8.0.34
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `app_user`
+--
+
+DROP TABLE IF EXISTS `app_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `app_user` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `password_hash` varchar(255) DEFAULT NULL,
+  `role` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UK3k4cplvh82srueuttfkwnylq0` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `app_user`
+--
+
+LOCK TABLES `app_user` WRITE;
+/*!40000 ALTER TABLE `app_user` DISABLE KEYS */;
+INSERT INTO `app_user` VALUES (1,'$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy','USER','peter'),(2,'$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy','USER','bruce'),(3,'$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy','USER','diana'),(4,'$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy','USER','clark'),(5,'$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy','USER','wanda'),(6,'$2a$10$mNf46Mju2T9n/2KSsS.wsO/bbpm9YBSHO1qdCAt.FTmx7GsLZNKYG','ADMIN','admin'),(7,'$2a$10$HsZfr4/JzA2c2oIsmFmxme1JkJYuxn/5WEQS31TQ0kp4nao1Psfqe','USER','user');
+/*!40000 ALTER TABLE `app_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `game_event`
+--
+
+DROP TABLE IF EXISTS `game_event`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `game_event` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `city` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `event_date` datetime(6) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `max_players` int DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `organizer_id` bigint DEFAULT NULL,
+  `sport_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKa5nihbomrdirxp2bom6nfvkw0` (`organizer_id`),
+  KEY `FKfoww3gh9xgwxx1tgf1e993acw` (`sport_id`),
+  CONSTRAINT `FKa5nihbomrdirxp2bom6nfvkw0` FOREIGN KEY (`organizer_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `FKfoww3gh9xgwxx1tgf1e993acw` FOREIGN KEY (`sport_id`) REFERENCES `sport` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `game_event`
+--
+
+LOCK TABLES `game_event` WRITE;
+/*!40000 ALTER TABLE `game_event` DISABLE KEYS */;
+INSERT INTO `game_event` VALUES (1,'Helsinki','Casual football after work.','2026-04-05 18:00:00.000000','Central Park Field',10,'Daily Bugle Football',1,NULL),(2,'Espoo','Fast paced pickup basketball.','2026-04-06 19:00:00.000000','Leppävaara Court',8,'Wayne Court Basketball',2,NULL),(3,'Tampere','Friendly doubles session.','2026-04-07 17:30:00.000000','Padel Center Tampere',4,'Amazon Padel Evening',3,NULL),(4,'Vantaa','Relaxed tennis match.','2026-04-08 09:00:00.000000','City Tennis Club',4,'Metropolis Tennis Morning',4,1),(5,'Turku','Casual indoor floorball game.','2026-04-09 20:00:00.000000','Indoor Arena',12,'Scarlet Floorball Night',5,2),(6,'Helsinki','Admin organized football event.','2026-04-10 18:30:00.000000','Olympic Field',12,'Admin Football Session',NULL,NULL),(7,'Espoo','Beginner friendly basketball.','2026-04-11 19:15:00.000000','West Court',6,'User Basketball Meetup',NULL,NULL),(8,'Helsinki','Friday padel doubles.','2026-04-12 18:00:00.000000','Padel House',4,'Spider Padel Friday',1,NULL),(9,'Espoo','Tennis with mixed skill levels.','2026-04-13 17:00:00.000000','Westend Tennis Hall',4,'Batman Tennis Club',2,1),(10,'Tampere','Fun floorball event for all.','2026-04-14 20:30:00.000000','Nokia Arena Side Hall',10,'Justice League Floorball',3,2);
+/*!40000 ALTER TABLE `game_event` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `reservation`
+--
+
+DROP TABLE IF EXISTS `reservation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reservation` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `join_date` datetime(6) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `game_event_id` bigint DEFAULT NULL,
+  `user_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK83sx0248xvv3wv22abc1hv7ts` (`game_event_id`),
+  KEY `FKm4oimk0l1757o9pwavorj6ljg` (`user_id`),
+  CONSTRAINT `FK83sx0248xvv3wv22abc1hv7ts` FOREIGN KEY (`game_event_id`) REFERENCES `game_event` (`id`),
+  CONSTRAINT `FKm4oimk0l1757o9pwavorj6ljg` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reservation`
+--
+
+LOCK TABLES `reservation` WRITE;
+/*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
+INSERT INTO `reservation` VALUES (1,'2026-03-17 16:52:13.000000','JOINED',1,2),(2,'2026-03-17 16:52:13.000000','JOINED',1,3),(3,'2026-03-17 16:52:13.000000','JOINED',1,5),(4,'2026-03-17 16:52:13.000000','JOINED',2,1),(5,'2026-03-17 16:52:13.000000','JOINED',2,4),(6,'2026-03-17 16:52:13.000000','JOINED',3,NULL),(7,'2026-03-17 16:52:13.000000','JOINED',3,2),(8,'2026-03-17 16:52:13.000000','JOINED',4,5),(9,'2026-03-17 16:52:13.000000','JOINED',5,NULL),(10,'2026-03-17 16:52:13.000000','JOINED',6,1),(11,'2026-03-17 16:52:13.000000','JOINED',6,3),(12,'2026-03-17 16:52:13.000000','JOINED',7,4),(13,'2026-03-17 16:52:13.000000','JOINED',8,2),(14,'2026-03-17 16:52:13.000000','JOINED',9,5),(15,'2026-03-17 16:52:13.000000','JOINED',10,NULL);
+/*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sport`
+--
+
+DROP TABLE IF EXISTS `sport`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sport` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sport`
+--
+
+LOCK TABLES `sport` WRITE;
+/*!40000 ALTER TABLE `sport` DISABLE KEYS */;
+INSERT INTO `sport` VALUES (1,'Casual tennis matches','Tennis'),(2,'Indoor floorball games','Floorball'),(3,'Jalkapallo','Football'),(4,'Koripallo','Basketball'),(5,'Padel','Padel');
+/*!40000 ALTER TABLE `sport` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `city` varchar(255) NOT NULL,
+  `created_at` datetime(6) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `skill_level` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'Helsinki','2026-03-17 16:52:13.000000','peter@casualgames.test','Peter Parker','Beginner','peter'),(2,'Espoo','2026-03-17 16:52:13.000000','bruce@casualgames.test','Bruce Wayne','Advanced','bruce'),(3,'Tampere','2026-03-17 16:52:13.000000','diana@casualgames.test','Diana Prince','Intermediate','diana'),(4,'Vantaa','2026-03-17 16:52:13.000000','clark@casualgames.test','Clark Kent','Beginner','clark'),(5,'Turku','2026-03-17 16:52:13.000000','wanda@casualgames.test','Wanda Maximoff','Advanced','wanda'),(6,'Not set','2026-03-17 16:52:38.151907','admin@example.com','admin','Not set','admin'),(7,'Not set','2026-03-17 16:52:38.176822','user@example.com','user','Not set','user');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_profile`
+--
+
+DROP TABLE IF EXISTS `user_profile`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_profile` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `age` int DEFAULT NULL,
+  `bio` varchar(255) DEFAULT NULL,
+  `experience_years` int DEFAULT NULL,
+  `phone_number` varchar(255) DEFAULT NULL,
+  `preferred_sport` varchar(255) DEFAULT NULL,
+  `user_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UKebc21hy5j7scdvcjt0jy6xxrv` (`user_id`),
+  CONSTRAINT `FK6kwj5lk78pnhwor4pgosvb51r` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_profile`
+--
+
+LOCK TABLES `user_profile` WRITE;
+/*!40000 ALTER TABLE `user_profile` DISABLE KEYS */;
+INSERT INTO `user_profile` VALUES (1,23,'Friendly neighborhood football fan.',2,'0401000001','Football',1),(2,35,'Competitive player who likes evening games.',10,'0401000002','Basketball',2),(3,29,'Enjoys padel and tennis on weekends.',5,'0401000003','Padel',3),(4,31,'Looking for relaxed local matches.',3,'0401000004','Floorball',4),(5,27,'Likes a mix of competitive and casual games.',7,'0401000005','Tennis',5),(6,NULL,NULL,NULL,NULL,NULL,7);
+/*!40000 ALTER TABLE `user_profile` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2026-03-17 17:11:18

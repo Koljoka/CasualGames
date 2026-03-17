@@ -1,5 +1,13 @@
 # My Application README
 
+Navigoi --> resources --> application properties. Muuta täältä käyttäjänimi ja salasana vastaamaan omia tietoja.
+spring.datasource.username=YOUR USERNAME
+spring.datasource.password=YOUR PASSWORD
+
+MySQL Wrokbenchissä luo tietokanta sekä sinne valmiiksi asetettu data kopioimalla sinne SQLCG-tiedoston sisältö.
+Käynnistä sovellus Application.java kautta.
+
+
 - [ ] TODO Replace or update this README with instructions relevant to your application
 
 ## Project Structure
