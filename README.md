@@ -9,10 +9,10 @@ Käynnistä sovellus Application.java kautta.
 
 Kantaan on sisällytetty jonkin verran käyttäjiä sekä tapahtumia.
 Voit käyttää joko valmista käyttäjää tunnuksilla:
-Käyttäjänimi = User
-Salasana = User123
+Käyttäjänimi = User |
+Salasana = User123 |
 Tai
-Käyttäjänimi = Admin
-Salasana = Admin123
+Käyttäjänimi = Admin |
+Salasana = Admin123 |
 
 Voit vaihtoehtoisesti rekisteröinnin kautta luoda oman käyttäjän jolla testaat sovellusta.
